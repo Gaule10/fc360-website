@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FC360 | Professional Analysis</title>
+    <title>FC360 | Elite Intelligence</title>
     <style>
         /* --- CSS VARIABLES (Thematic Colors) --- */
         :root {
@@ -54,22 +54,18 @@
             border-bottom: 1px solid rgba(138, 79, 255, 0.2);
             z-index: 1000;
         }
-        .logo { 
-            font-size: 1.5rem; 
-            font-weight: 800; 
-            color: var(--accent-cyan);
+        
+        /* LOGO STYLING */
+        .logo-container {
             display: flex;
             align-items: center;
         }
-        .logo::before {
-            content: '';
-            display: inline-block;
-            width: 20px; height: 20px;
-            margin-right: 10px;
-            background: var(--accent-cyan);
-            clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
-            box-shadow: 0 0 10px var(--accent-cyan);
+        .logo-img {
+            height: 50px; /* Controls the logo size */
+            width: auto;
+            object-fit: contain;
         }
+
         .nav-links a {
             color: var(--text-light);
             text-decoration: none;
@@ -146,12 +142,12 @@
             text-transform: uppercase;
         }
 
-        /* --- SERVICES GRID (UPDATED) --- */
+        /* --- SERVICES GRID --- */
         .services-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 2rem;
-            align-items: start; /* Ensures cards align at the top even if different heights */
+            align-items: start;
         }
         .card h3 { 
             margin-bottom: 1.5rem; 
@@ -161,7 +157,6 @@
             border-bottom: 1px solid rgba(138, 79, 255, 0.2);
             padding-bottom: 1rem;
         }
-        /* New Styles for the Tier Lists */
         .tier-list {
             list-style: none;
             padding: 0;
@@ -177,14 +172,14 @@
         }
         .tier-list li:last-child { border-bottom: none; }
         .tier-list li::before {
-            content: '►'; /* Small arrow icon */
+            content: '►';
             color: var(--accent-pink);
             font-size: 0.8rem;
             margin-right: 12px;
         }
         .tier-list li:hover {
             color: var(--text-light);
-            padding-left: 5px; /* Subtle movement on hover */
+            padding-left: 5px;
             transition: all 0.2s ease;
         }
 
@@ -240,14 +235,16 @@
             .hero h1 { font-size: 3.5rem; }
             .hero p { font-size: 1.2rem; }
             .nav-links { display: none; }
-            .logo { margin: 0 auto; }
+            .logo-container { margin: 0 auto; }
         }
     </style>
 </head>
 <body>
 
     <nav>
-        <div class="logo">FC360</div>
+        <div class="logo-container">
+            <img src="https://placehold.co/200x80/080214/38bdf8?text=YOUR+LOGO" alt="FC360 Logo" class="logo-img">
+        </div>
         <div class="nav-links">
             <a href="#services">Services</a>
             <a href="#testimonials">Testimonials</a>
@@ -257,7 +254,7 @@
 
     <header class="hero">
         <h1>FC360</h1>
-        <p>Professional Analysis to Everyone</p>
+        <p>Elite Intelligence. Any Level.</p>
         <a href="#contact" class="btn">Get in Touch</a>
     </header>
 
