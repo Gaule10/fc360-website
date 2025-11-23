@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FC360 | Professional Analysis</title>
+    <style>
+        /* --- CSS VARIABLES (Thematic Colors) --- */
+        :root {
+            --bg-darkest: #080214;
+            --bg-gradient-center: #1a0b3d;
+            --bg-card: rgba(25, 15, 60, 0.7);
+            --border-glow: rgba(138, 79, 255, 0.4);
+            --accent-pink: #e942f5;
+            --accent-cyan: #38bdf8;
+            --accent-purple: #8a4fff;
+            --text-light: #ffffff;
+            --text-dim: #cbaefc;
+            --font-main: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+        }
+
+        /* --- GLOBAL RESET & BODY --- */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body {
+            font-family: var(--font-main);
+            background: radial-gradient(circle at 50% 20%, var(--bg-gradient-center) 0%, var(--bg-darkest) 80%);
+            background-color: var(--bg-darkest);
+            color: var(--text-light);
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        /* --- TYPOGRAPHY --- */
+        h1, h2, h3 { font-weight: 700; letter-spacing: 1px; }
+        h2 {
+            font-size: 2.5rem;
+            text-align: center;
+            margin-bottom: 3rem;
+            color: var(--accent-pink);
+            text-shadow: 0 0 15px rgba(233, 66, 245, 0.4);
+        }
+
+        /* --- NAVIGATION --- */
+        nav {
+            position: sticky;
+            top: 0;
+            background-color: rgba(8, 2, 20, 0.85);
+            backdrop-filter: blur(8px);
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid rgba(138, 79, 255, 0.2);
+            z-index: 1000;
+        }
+        .logo { 
+            font-size: 1.5rem; 
+            font-weight: 800; 
+            color: var(--accent-cyan);
+            display: flex;
+            align-items: center;
+        }
+        .logo::before {
+            content: '';
+            display: inline-block;
+            width: 20px; height: 20px;
+            margin-right: 10px;
+            background: var(--accent-cyan);
+            clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
+            box-shadow: 0 0 10px var(--accent-cyan);
+        }
+        .nav-links a {
+            color: var(--text-light);
+            text-decoration: none;
+            margin-left: 2rem;
+            font-weight: 500;
+            transition: color 0.3s;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        .nav-links a:hover { color: var(--accent-pink); }
+
+        /* --- REUSABLE COMPONENTS --- */
+        .btn, button.submit-btn {
+            padding: 1rem 2.5rem;
+            background: linear-gradient(135deg, var(--accent-purple), var(--accent-pink));
+            color: var(--text-light);
+            text-decoration: none;
+            font-weight: bold;
+            border-radius: 30px;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 0 20px rgba(233, 66, 245, 0.3);
+            display: inline-block;
+        }
+        .btn:hover, button.submit-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 0 30px rgba(233, 66, 245, 0.6);
+            background: linear-gradient(135deg, var(--accent-pink), var(--accent-purple));
+        }
+
+        .glass-card {
+            background-color: var(--bg-card);
+            border: 1px solid var(--border-glow);
+            box-shadow: inset 0 0 20px rgba(138, 79, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 16px;
+            padding: 2.5rem;
+            transition: transform 0.3s, border-color 0.3s;
+        }
+        .glass-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--accent-pink);
+        }
+
+        /* --- SECTIONS --- */
+        section, header { padding: 6rem 2rem; max-width: 1200px; margin: 0 auto; }
+
+        /* --- HERO SECTION --- */
+        header.hero {
+            min-height: 85vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+        .hero h1 { 
+            font-size: 6rem; 
+            margin-bottom: 0.5rem;
+            background: linear-gradient(to right, var(--accent-pink), var(--text-light));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 0 40px rgba(233, 66, 245, 0.4);
+            line-height: 1.1;
+        }
+        .hero p { 
+            font-size: 1.8rem;
+            color: var(--text-dim); 
+            max-width: 800px; 
+            margin-bottom: 3rem; 
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        /* --- SERVICES GRID (UPDATED) --- */
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            align-items: start; /* Ensures cards align at the top even if different heights */
+        }
+        .card h3 { 
+            margin-bottom: 1.5rem; 
+            color: var(--accent-cyan); 
+            font-size: 1.8rem; 
+            text-align: center;
+            border-bottom: 1px solid rgba(138, 79, 255, 0.2);
+            padding-bottom: 1rem;
+        }
+        /* New Styles for the Tier Lists */
+        .tier-list {
+            list-style: none;
+            padding: 0;
+            text-align: left;
+        }
+        .tier-list li {
+            padding: 1rem 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            color: var(--text-dim);
+            font-size: 1.1rem;
+            display: flex;
+            align-items: center;
+        }
+        .tier-list li:last-child { border-bottom: none; }
+        .tier-list li::before {
+            content: '►'; /* Small arrow icon */
+            color: var(--accent-pink);
+            font-size: 0.8rem;
+            margin-right: 12px;
+        }
+        .tier-list li:hover {
+            color: var(--text-light);
+            padding-left: 5px; /* Subtle movement on hover */
+            transition: all 0.2s ease;
+        }
+
+        /* --- TESTIMONIALS --- */
+        .testimonial-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+        }
+        .quote {
+            font-style: italic;
+            color: var(--text-light);
+            font-size: 1.1rem;
+        }
+        .author { 
+            display: block; margin-top: 1.5rem; font-weight: bold; 
+            color: var(--accent-pink); 
+        }
+
+        /* --- CONTACT FORM --- */
+        .contact-container { max-width: 600px; margin: 0 auto; }
+        .form-group { margin-bottom: 1.5rem; }
+        label { display: block; margin-bottom: 0.5rem; color: var(--accent-cyan); font-weight: 600;}
+        input, textarea {
+            width: 100%;
+            padding: 1rem;
+            border-radius: 8px;
+            border: 1px solid var(--border-glow);
+            background-color: rgba(10, 4, 28, 0.6);
+            color: var(--text-light);
+            font-family: inherit;
+            transition: border-color 0.3s, box-shadow 0.3s;
+        }
+        input:focus, textarea:focus {
+            outline: none;
+            border-color: var(--accent-pink);
+            box-shadow: 0 0 15px rgba(233, 66, 245, 0.3);
+        }
+        button.submit-btn { width: 100%; font-size: 1.1rem; }
+
+        /* --- FOOTER --- */
+        footer {
+            text-align: center;
+            padding: 3rem 2rem;
+            background-color: rgba(8, 2, 20, 0.9);
+            margin-top: 5rem;
+            color: var(--text-dim);
+            border-top: 1px solid rgba(138, 79, 255, 0.2);
+        }
+
+        /* --- MOBILE RESPONSIVE --- */
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 3.5rem; }
+            .hero p { font-size: 1.2rem; }
+            .nav-links { display: none; }
+            .logo { margin: 0 auto; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <div class="logo">FC360</div>
+        <div class="nav-links">
+            <a href="#services">Services</a>
+            <a href="#testimonials">Testimonials</a>
+            <a href="#contact">Contact</a>
+        </div>
+    </nav>
+
+    <header class="hero">
+        <h1>FC360</h1>
+        <p>Professional Analysis to Everyone</p>
+        <a href="#contact" class="btn">Get in Touch</a>
+    </header>
+
+    <section id="services">
+        <div class="section-header">
+            <h2>Our Services</h2>
+        </div>
+        <div class="services-grid">
+            
+            <div class="glass-card card">
+                <h3>Individual</h3>
+                <ul class="tier-list">
+                    <li>One Game</li>
+                    <li>Multiple Games</li>
+                    <li>Full Season</li>
+                </ul>
+            </div>
+
+            <div class="glass-card card">
+                <h3>Club</h3>
+                <ul class="tier-list">
+                    <li>Team Analysis</li>
+                    <li>Opposition Analysis</li>
+                    <li>Full Time Department</li>
+                </ul>
+            </div>
+
+            <div class="glass-card card">
+                <h3>College Pathway</h3>
+                <ul class="tier-list">
+                    <li>Player Identification</li>
+                    <li>College Guidance</li>
+                    <li>Player Profiles</li>
+                </ul>
+            </div>
+
+        </div>
+    </section>
+
+    <section id="testimonials">
+        <div class="section-header">
+            <h2>Client Success</h2>
+        </div>
+        <div class="testimonial-grid">
+            <div class="glass-card card">
+                <p class="quote">"FC360 completely changed how we prepare for match day. The insights are invaluable."</p>
+                <span class="author">- Head Coach, Academy Level</span>
+            </div>
+            <div class="glass-card card">
+                <p class="quote">"The simplicity of the reports allows us to focus on coaching rather than crunching numbers."</p>
+                <span class="author">- Technical Director, Regional Club</span>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact">
+        <div class="section-header">
+            <h2>Contact Us</h2>
+        </div>
+        <div class="glass-card contact-container">
+            <form action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
+                <div class="form-group">
+                    <label for="name">Name</label>
+                    <input type="text" id="name" name="name" required placeholder="Coach Name">
+                </div>
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" name="email" required placeholder="email@example.com">
+                </div>
+                <div class="form-group">
+                    <label for="message">Message</label>
+                    <textarea id="message" name="message" rows="5" required placeholder="Tell us which service interests you..."></textarea>
+                </div>
+                <button type="submit" class="submit-btn">Send Message</button>
+            </form>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2025 FC360 Performance Analysis. All rights reserved.</p>
+    </footer>
+
+</body>
+</html>
